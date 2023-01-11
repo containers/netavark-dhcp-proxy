@@ -1,0 +1,16 @@
+[Unit]
+Description=Netavark DHCP proxy service
+Requires=netavark-dhcp-proxy.socket
+After=netavark-dhcp-proxy.socket
+Documentation=
+StartLimitIntervalSec=0
+
+[Service]
+Delegate=true
+Type=exec
+KillMode=process
+Environment=LOGGING="--log-level=info"
+ExecStart=/usr/libexec/podman/netavark-proxy -a 30
+
+[Install]
+WantedBy=default.target
